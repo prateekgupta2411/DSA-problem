@@ -1,4 +1,4 @@
-package dp_questions_fibonacci_pattern;
+package dp_fibonacci_pattern;
 
 public class Fibo_Tabulation {
     public static int fibo(int n, int dp[]){

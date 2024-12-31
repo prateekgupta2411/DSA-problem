@@ -1,4 +1,4 @@
-package dp_questions_fibonacci_pattern;
+package dp_fibonacci_pattern;
 
 public class Fibonacci_Memorization {
     public static int printFibo(int n,int f[]){

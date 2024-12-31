@@ -1,4 +1,4 @@
-package dp_questions_fibonacci_pattern;
+package dp_fibonacci_pattern;
 
 public class Climbing_Stairs_Tabulation {
     public static int totalWays(int n){  // O(n)
