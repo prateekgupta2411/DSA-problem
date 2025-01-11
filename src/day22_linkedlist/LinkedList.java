@@ -1,221 +1,230 @@
 package day22_linkedlist;
 
 public class LinkedList {
-    public static class Node{
+    // Node class represents each element in the LinkedList
+    public static class Node {
         int data;
         Node next;
-        public Node(int data){
-            this.data = data;
-            this.next = null;
+
+        public Node(int data) {
+            this.data = data; // Store data
+            this.next = null; // Next is null initially
         }
     }
-    public static Node head;
-    public static Node tail;
-    public static int size = 0;
 
-    public void addFirst(int data){
-        // create new node
-        Node newNode = new Node(data);
-        size++;
-        if(head == null){
+    public static Node head; // Head of the LinkedList
+    public static Node tail; // Tail of the LinkedList
+    public static int size = 0; // Size of the LinkedList
+
+    // Add a new node at the beginning of the LinkedList
+    public void addFirst(int data) {
+        Node newNode = new Node(data); // Create a new node
+        size++; // Increment size
+        if (head == null) {
+            // If list is empty, head and tail are the new node
             head = tail = newNode;
             return;
         }
-        // newNode next = head
-        newNode.next = head;//link
-        // head is my new node
-        head = newNode;
+        newNode.next = head; // Link new node to the current head
+        head = newNode; // Update head
     }
 
-    public void addLast(int data){
-        // create a new Node
-        Node newNode = new Node(data);
-        size++;
-        if(head == null){
+    // Add a new node at the end of the LinkedList
+    public void addLast(int data) {
+        Node newNode = new Node(data); // Create a new node
+        size++; // Increment size
+        if (head == null) {
+            // If list is empty, head and tail are the new node
             head = tail = newNode;
             return;
         }
-        // tail ka next = newNode
-        tail.next = newNode;
-        // newNode mera tail ban jaye
-        tail = newNode;
+        tail.next = newNode; // Link tail to the new node
+        tail = newNode; // Update tail
     }
 
-    public void print(){
-        if(head == null){
+    // Print all elements of the LinkedList
+    public void print() {
+        if (head == null) {
             System.out.println("LL is Empty");
             return;
         }
         Node temp = head;
-        while (temp != null){
-            System.out.print(temp.data + "->");
+        while (temp != null) {
+            System.out.print(temp.data + "->"); // Print each node's data
             temp = temp.next;
         }
         System.out.println("null");
     }
 
-    // add any index
-    public void add(int ind, int data){
-        if(ind ==0){
-            addFirst(data);
+    // Add a node at a specific index
+    public void add(int ind, int data) {
+        if (ind == 0) {
+            addFirst(data); // If index is 0, add at the start
             return;
         }
-        Node newNode = new Node(data);
-        size++;
+        Node newNode = new Node(data); // Create a new node
+        size++; // Increment size
         Node temp = head;
         int i = 0;
-        while (i < ind-1){
+        while (i < ind - 1) { // Traverse to the (index - 1)th node
             temp = temp.next;
             i++;
         }
-        // i = ind-1; temp ->  prev
-        newNode.next = temp.next;
-        temp.next = newNode;
+        newNode.next = temp.next; // Link newNode to next node
+        temp.next = newNode; // Link previous node to newNode
     }
 
-    public int removeFirst(){
-        if(size == 0){
+    // Remove the first node
+    public int removeFirst() {
+        if (size == 0) {
             System.out.println("LL is Empty");
             return Integer.MIN_VALUE;
         } else if (size == 1) {
             int val = head.data;
-            head = tail = null;
+            head = tail = null; // Clear the list
             size = 0;
             return val;
         }
-        int val = head.data;
-        head = head.next;
+        int val = head.data; // Store data of the head
+        head = head.next; // Move head to the next node
         size--;
         return val;
     }
-    public int removeLast(){
-        if(size == 0){
+
+    // Remove the last node
+    public int removeLast() {
+        if (size == 0) {
             System.out.println("LL is Empty");
             return Integer.MIN_VALUE;
         } else if (size == 1) {
             int val = head.data;
-            head = tail = null;
+            head = tail = null; // Clear the list
             size = 0;
             return val;
         }
-        // prev : i = size-2
         Node prev = head;
-        for(int i=0;i<size-2;i++){
+        for (int i = 0; i < size - 2; i++) { // Traverse to the second last node
             prev = prev.next;
         }
-        int val = prev.next.data; //tail.data
-        prev.next = null;
-        tail = prev;
+        int val = prev.next.data; // Store tail's data
+        prev.next = null; // Remove the last node
+        tail = prev; // Update tail
         size--;
         return val;
     }
-    public int itrSearch(int key){
+
+    // Search for an element iteratively
+    public int itrSearch(int key) {
         Node temp = head;
         int i = 0;
-        while (temp != null){
-            if(temp.data == key){
-                return i;
+        while (temp != null) {
+            if (temp.data == key) {
+                return i; // Return index if key is found
             }
             temp = temp.next;
             i++;
         }
-        return -1;
+        return -1; // Key not found
     }
 
-    public void reverse(){
+    // Reverse the LinkedList
+    public void reverse() {
         Node prev = null;
-        Node curr = tail = head;
+        Node curr = tail = head; // Start with head
         Node next;
-        while(curr != null){
-            next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
+        while (curr != null) {
+            next = curr.next; // Save the next node
+            curr.next = prev; // Reverse the link
+            prev = curr; // Move prev forward
+            curr = next; // Move curr forward
         }
-        head = prev;
+        head = prev; // Update head
     }
 
-    public void deleteNthfromEnd(int n){
-        // calculate size
+    // Delete the nth node from the end
+    public void deleteNthfromEnd(int n) {
         int sz = 0;
         Node temp = head;
-        while (temp != null){
+        while (temp != null) {
             temp = temp.next;
-            sz++;
+            sz++; // Calculate size
         }
-        if(n==sz){
-            head = head.next; // remove first
+        if (n == sz) {
+            head = head.next; // Remove the first node
             return;
         }
-        //size-n
         int i = 1;
-        int iToFind = size-n;
+        int iToFind = size - n;
         Node prev = head;
-        while (i< iToFind){
+        while (i < iToFind) {
             prev = prev.next;
             i++;
         }
-        prev.next = prev.next.next;
-        return;
+        prev.next = prev.next.next; // Skip the nth node
     }
-// slow fast approach
-    public Node findMid(Node Head){
+
+    // Find the middle node using the slow-fast pointer approach
+    public Node findMid(Node Head) {
         Node slow = head;
         Node fast = head;
-        while (fast!=null && fast.next!=null){
-            slow = slow.next; // 1 se badega
-            fast = fast.next.next;// 2 se badega
+        while (fast != null && fast.next != null) {
+            slow = slow.next; // Move slow one step
+            fast = fast.next.next; // Move fast two steps
         }
-        return slow; // slow mera even and odd cases me mid pe hoga
+        return slow; // Slow will point to the middle
     }
-    public boolean checkPalindrome(){
-        if(head == null || head.next == null){
-            return true;
-        }
-        //find Mid
-        Node midleNode = findMid(head);
 
-        // reverse 2nd Half
+    // Check if the LinkedList is a palindrome
+    public boolean checkPalindrome() {
+        if (head == null || head.next == null) {
+            return true; // Empty or single node list is a palindrome
+        }
+        Node midleNode = findMid(head); // Find the middle node
+
+        // Reverse the second half
         Node prev = null;
         Node curr = midleNode;
         Node next;
-        while (curr!=null){
+        while (curr != null) {
             next = curr.next;
             curr.next = prev;
             prev = curr;
             curr = next;
         }
-        Node right = prev; // right half head
+        Node right = prev; // Right half head
         Node left = head;
 
-        // check left half & right half
-        while (right != null){
-            if(left.data != right.data){
-                return false;
+        // Compare left and right halves
+        while (right != null) {
+            if (left.data != right.data) {
+                return false; // Mismatch found
             }
             left = left.next;
             right = right.next;
         }
-        return true;
+        return true; // List is a palindrome
     }
 
-    public static boolean isCycle(){
+    // Check if the LinkedList contains a cycle
+    public static boolean isCycle() {
         Node slow = head;
         Node fast = head;
-        while (fast != null && fast.next!=null){
-            slow = slow.next;
-            fast = fast.next.next;
-            if(slow == fast){
-                return true; // cycle exist
+        while (fast != null && fast.next != null) {
+            slow = slow.next; // Move slow one step
+            fast = fast.next.next; // Move fast two steps
+            if (slow == fast) {
+                return true; // Cycle detected
             }
         }
-        return false; // not exist
+        return false; // No cycle
     }
+
     public static void main(String[] args) {
         head = new Node(1);
         head.next = new Node(2);
         head.next.next = new Node(3);
-//        head.next.next.next = head;
+        // Uncomment below line to create a cycle
+        // head.next.next.next = head;
         // 1->2->3->1
         System.out.println(isCycle());
     }
