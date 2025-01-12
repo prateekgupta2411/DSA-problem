@@ -10,7 +10,7 @@ public class CheckPartionOfTwoSubarrayWithEqualSum {
     }
     public static boolean partitionCheck(int arr[]){
         int n = arr.length;
-        int totalSum =findSum(arr);
+        int totalSum = findSum(arr);
         int prefSum = 0;
         for(int i=0;i<n;i++){
             prefSum = arr[i] + prefSum;
@@ -25,5 +25,4 @@ public class CheckPartionOfTwoSubarrayWithEqualSum {
         int arr[] = {1,3,2,4,5};
         System.out.println(partitionCheck(arr));
     }
-
 }
