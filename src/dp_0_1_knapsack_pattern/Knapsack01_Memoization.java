@@ -2,7 +2,7 @@ package dp_0_1_knapsack_pattern;
 
 import java.util.Arrays;
 
-public class Knapsack01 {
+public class Knapsack01_Memoization {
     public static int knapsack(int val[], int wt[], int W, int n, int dp[][]) {
         // base case
         if (n == 0 || W == 0) {
@@ -31,6 +31,8 @@ public class Knapsack01 {
         int W = 9;
         // max profit -> 6+8+5 -> 19
 
+        // 2d array isliye create kiya he because yhaa W and n dono change ho rhe he
+        // agr single change ho rha he to 1d array 2 change 2d array 3 change 3d array soOn
         int dp[][] = new int[val.length + 1][W + 1];
 
 //        // Initialize dp table with -1
@@ -39,6 +41,8 @@ public class Knapsack01 {
 //                dp[i][j] = -1;
 //            }
 //        }
+
+        //Simple ways
         // Initialize dp table with -1 using Arrays.fill()
         for (int i = 0; i <= val.length; i++) {
             Arrays.fill(dp[i], -1);  // Fill each row with -1
