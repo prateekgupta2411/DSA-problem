@@ -6,7 +6,8 @@ import java.util.HashSet;
 
 public class SubarrayWithKSum {
     public static void main(String[] args) {
-        int arr[] = {2, 8, 2, 6, -6, 3, 2};
+//        int arr[] = {2, 8, 2, 6, -6, 3, 2};
+        int arr[] = {10, 0, 0, 5, 2, 7};
 
         // Check if there exists a subarray with sum equal to k
         boolean found = checkKSumSubarray(arr, 5);
@@ -23,6 +24,10 @@ public class SubarrayWithKSum {
         // Find the length of the longest subarray with sum k
         int maxLen = findLongestKSumSubarray(arr, 5);
         System.out.println("maxLen : " + maxLen);
+
+        // Find the length of the smallest subarray with sum k
+        int minLen = findSmallestKSumSubarray(arr, 5);
+        System.out.println("minLen : " + minLen);
 
         // Count the total number of subarrays with sum k
         int count = findTotalSumSubarray(arr, 5);
@@ -85,15 +90,33 @@ public class SubarrayWithKSum {
         return maxLen;
     }
 
+    // Method to find the length of the Smallest subarray with sum k
+    public static int findSmallestKSumSubarray(int arr[], int k) {
+        int minLen = Integer.MAX_VALUE, sum = 0;
+        HashMap<Integer, Integer> myMap = new HashMap<>();
+        myMap.put(0, -1); // To handle prefix sum equal to k
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+            int rem = sum - k; // Calculate the required remainder
+            if (myMap.containsKey(rem)) { // If remainder exists, calculate the subarray length
+                int len = i - myMap.get(rem);
+                minLen = Math.min(minLen, len); // Update the minimum length
+            }
+            myMap.put(sum, i);
+        }
+        // If minLen is not updated, return -1 to indicate no subarray was found
+        return minLen == Integer.MAX_VALUE ? -1 : minLen;
+    }
+
     // Method to count the total number of subarrays with sum k
     public static int findTotalSumSubarray(int arr[], int k) {
         // Step 1: Initialize variables
         int count = 0; // This will store the total count of subarrays with sum k
         int sum = 0;   // This keeps track of the prefix sum
-        HashMap<Integer, Integer> sumFreqMap = new HashMap<>(); // Map to store frequency of prefix sums
+        HashMap<Integer, Integer> map = new HashMap<>(); // Map to store frequency of prefix sums
 
         // Step 2: Add an initial entry to handle cases where prefix sum equals k
-        sumFreqMap.put(0, 1); // If the prefix sum equals k, it means the subarray starts from index 0
+        map.put(0, 1); // If the prefix sum equals k, it means the subarray starts from index 0
 
         // Step 3: Traverse the array
         for (int i = 0; i < arr.length; i++) {
@@ -105,11 +128,28 @@ public class SubarrayWithKSum {
 
             // Step 3.3: Check if the remainder exists in the map
             // If it does, it means there are subarrays ending at the current index with sum k
-            count += sumFreqMap.getOrDefault(rem, 0);
+//            count += map.getOrDefault(rem, 0);
 
             // Step 3.4: Update the frequency of the current prefix sum in the map
             // If the prefix sum already exists, increment its count; otherwise, set it to 1
-            sumFreqMap.put(sum, sumFreqMap.getOrDefault(sum, 0) + 1);
+//            map.put(sum, map.getOrDefault(sum, 0) + 1);
+
+
+            // Step 1: Get the frequency of the remainder (sum - k) from the map
+            int remainderCount = map.getOrDefault(rem, 0);
+
+            // Step 2: Add the frequency of the remainder to the count
+            count += remainderCount;
+
+            // Step 1: Check if the current sum is already in the map or not
+            int currentCount = map.getOrDefault(sum, 0);
+
+            // Step 2: Increment the count by 1 because this sum has occurred again
+            int updatedCount = currentCount + 1;
+
+           // Step 3: Put the updated count for the current sum back into the map
+            map.put(sum, updatedCount);
+
         }
 
         // Step 4: Return the total count of subarrays with sum k

@@ -15,20 +15,20 @@ public class TrappingRainWater {
         for (int i = n - 2; i >= 0; i--) {
             rightMax[i] = Math.max(height[i], rightMax[i + 1]);
         }
-        int trappedWater = 0;
+        int ans = 0;
         //loop
         for (int i = 0; i < n; i++) {
             //waterLevel = min(leftmax bound, rigthmax bound)
             int waterLevel = Math.min(leftMax[i], rightMax[i]);
 
             //Trapped water = waterLevel - height[i]
-            trappedWater += waterLevel - height[i];
+            ans += waterLevel - height[i];
 
         }
-        return trappedWater;
+        return ans;
     }
     public static void main(String[] args) {
-        int[] height = {4, 2, 0, 6, 3, 2, 5};
+        int[] height = {0,1,0,2,1,0,1,3,2,1,2,1};
         int ans = trappingRainWater(height);
         System.out.println(ans);
     }
