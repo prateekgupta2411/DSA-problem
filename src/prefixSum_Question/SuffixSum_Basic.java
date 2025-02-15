@@ -1,7 +1,7 @@
 package prefixSum_Question;
 
 public class SuffixSum_Basic {
-    public static int[]  suffSum(int arr[]){
+    public static int[] suffSum(int arr[]){
         int n = arr.length;
         int[] suff = new int[n];
         suff[n-1] = arr[n-1];
