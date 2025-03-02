@@ -1,14 +1,15 @@
-package day1;
+package day1.top_100_concept_inJava;
+
 
 class OuterClass {
-    private int data = 10; // Private variable
+    private int data = 10;
 
-    private void run() { // Private method
+    private void run() {
         System.out.println("This is outer class method");
     }
 
-    class InnerClass {
-        InnerClass() {
+    class InnerCl {
+        InnerCl() {
             System.out.println("Data in constructor: " + data);
         }
 
@@ -22,9 +23,9 @@ class OuterClass {
 
 public class Main {
     public static void main(String[] args) {
-        OuterClass outer = new OuterClass(); // Creating OuterClass instance
-        OuterClass.InnerClass inner = outer.new InnerClass(); // Creating InnerClass instance
-
-        inner.show(); // Calling the method
+        OuterClass oc = new OuterClass();
+        OuterClass.InnerCl ic = oc.new InnerCl();
+        ic.show();
     }
 }
+
