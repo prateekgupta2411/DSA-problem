@@ -1,4 +1,4 @@
-package day28;
+package day28_Tree_Type1;
 
 public class heightOfTree {
     static class Node {
@@ -12,6 +12,7 @@ public class heightOfTree {
         }
     }
 
+    // height of tree
     public static int height(Node root) {
         if (root == null) {
             return 0;
@@ -20,6 +21,8 @@ public class heightOfTree {
         int rh = height(root.right);
         return Math.max(lh,rh) + 1;
     }
+
+    //count the nodes
     public static int countNode(Node root){
         if(root == null){
             return 0;
@@ -28,6 +31,8 @@ public class heightOfTree {
         int rCount = countNode(root.right);
         return lCount + rCount + 1;
     }
+
+    // sum of nodes
     public static int sumOfNode(Node root){
         if(root ==null)
             return 0;
@@ -36,6 +41,7 @@ public class heightOfTree {
         return leftSum + rightSum + root.data;
     }
 
+    // main function
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);

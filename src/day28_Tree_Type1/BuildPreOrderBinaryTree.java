@@ -1,8 +1,8 @@
-package day28;
-
+package day28_Tree_Type1;
+// pre,In,post -> DFS
+// level -> BFS(using Queue)
 import java.util.LinkedList;
 import java.util.Queue;
-
 public class BuildPreOrderBinaryTree {
     static class Node{
         int data;
@@ -26,6 +26,7 @@ public class BuildPreOrderBinaryTree {
             newNode.right = buildTree(nodes);
             return newNode;
         }
+        // preOrder
         public static void preOrder(Node root){ //0(n)
             if(root == null){
                 System.out.print("-1" + "  ");
@@ -35,6 +36,8 @@ public class BuildPreOrderBinaryTree {
             preOrder(root.left);
             preOrder(root.right);
         }
+
+        //InOrder
         public static void inOrder(Node root){ //0(n)
             if(root == null){
                 System.out.print("-1" + "  ");
@@ -44,6 +47,7 @@ public class BuildPreOrderBinaryTree {
             System.out.print(root.data +" ");
             inOrder(root.right);
         }
+        //PostOrder
         public static void postOrder(Node root){ //0(n)
             if(root == null){
                 System.out.print("-1" + "  ");
@@ -53,9 +57,8 @@ public class BuildPreOrderBinaryTree {
             postOrder(root.right);
             System.out.print(root.data +" ");
         }
-
         //level order traversal
-        public static void levelOrderTraversal(Node root){
+        public static void levelOrderTraversal(Node root){ //O(n)
             if(root == null){
                 return;
             }
