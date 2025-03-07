@@ -1,8 +1,8 @@
 package Day_basic;
 
-public class Count_Digits_Number {
+public class Count_Digits {
     public static void main(String[] args) {
-        int n = 1255554;
+        int n = 124;
         int count = 0;
         while (n >0){
             int rem = n % 10;

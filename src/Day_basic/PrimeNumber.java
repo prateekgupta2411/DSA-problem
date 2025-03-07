@@ -1,7 +1,7 @@
 package Day_basic;
 
 public class PrimeNumber {
-    // Way 1 check no is prime or not
+    // Way 1
     public static boolean checkPrime(int n) {
         int count = 0;
         for (int i = 1; i <= n; i++) {
@@ -13,11 +13,9 @@ public class PrimeNumber {
         return false;
     }
 
-    // Way 2 check no is prime or not
+    // Way 2
     public static boolean checkPrime1(int n) {
-        //corner cases
         if (n < 2) return false;
-//        if(n == 2) return true;
         for (int i = 2; i * i <= n; i++) {
             if (n % i == 0) {
                 return false;
@@ -26,10 +24,9 @@ public class PrimeNumber {
         return true;
     }
 
-    // Way 3 check no is prime or not
+    // Way 3
     static boolean checkPrime3(int n) {
         int cnt = 0;
-
         // Loop through numbers from 1
         // to the square root of n.
         for (int i = 1; i <= Math.sqrt(n); i++) {
@@ -62,6 +59,7 @@ public class PrimeNumber {
         }
     }
 
+    // print prime no
     public static void printPrimesInRange(int n) {
         for (int i = 0; i <= n; i++) {
             if (checkPrime1(i)) {
@@ -70,17 +68,14 @@ public class PrimeNumber {
         }
         System.out.println();
     }
-
-
+    // main function
     public static void main(String[] args) {
-        int n = 10;
 //        boolean isPrime = checkPrime1(n);
 //        if (isPrime) {
 //            System.out.println(n + " is a prime number.");
 //        } else {
 //            System.out.println(n + " is not a prime number.");
 //        }
-
-        printPrimesInRange(n);
+        printPrimesInRange(20);
     }
 }
