@@ -1,4 +1,4 @@
-package Day_basic;
+package Day_basic_Math;
 
 public class Check_Number_Power_2 {
     public static void main(String[] args) {

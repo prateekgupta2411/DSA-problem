@@ -1,11 +1,10 @@
 package day22_linkedlist;
 
 public class LinkedList {
-    // Node class represents each element in the LinkedList
+    // Node class
     public static class Node {
         int data;
         Node next;
-
         public Node(int data) {
             this.data = data; // Store data
             this.next = null; // Next is null initially
@@ -16,33 +15,31 @@ public class LinkedList {
     public static Node tail; // Tail of the LinkedList
     public static int size = 0; // Size of the LinkedList
 
-    // Add a new node at the beginning of the LinkedList
+    // Add First
     public void addFirst(int data) {
-        Node newNode = new Node(data); // Create a new node
-        size++; // Increment size
+        Node newNode = new Node(data);
+        size++;
         if (head == null) {
-            // If list is empty, head and tail are the new node
             head = tail = newNode;
             return;
         }
-        newNode.next = head; // Link new node to the current head
-        head = newNode; // Update head
+        newNode.next = head;
+        head = newNode;
     }
 
-    // Add a new node at the end of the LinkedList
+    // Add Last
     public void addLast(int data) {
-        Node newNode = new Node(data); // Create a new node
-        size++; // Increment size
+        Node newNode = new Node(data);
+        size++;
         if (head == null) {
-            // If list is empty, head and tail are the new node
             head = tail = newNode;
             return;
         }
-        tail.next = newNode; // Link tail to the new node
-        tail = newNode; // Update tail
+        tail.next = newNode;
+        tail = newNode;
     }
 
-    // Print all elements of the LinkedList
+    // Print LL
     public void print() {
         if (head == null) {
             System.out.println("LL is Empty");
@@ -50,98 +47,70 @@ public class LinkedList {
         }
         Node temp = head;
         while (temp != null) {
-            System.out.print(temp.data + "->"); // Print each node's data
+            System.out.print(temp.data + "->");
             temp = temp.next;
         }
         System.out.println("null");
     }
 
-    // Add a node at a specific index
+    // Add a node at any index
     public void add(int ind, int data) {
         if (ind == 0) {
-            addFirst(data); // If index is 0, add at the start
+            addFirst(data);
             return;
         }
-        Node newNode = new Node(data); // Create a new node
-        size++; // Increment size
+        Node newNode = new Node(data);
+        size++;
         Node temp = head;
         int i = 0;
-        while (i < ind - 1) { // Traverse to the (index - 1)th node
+        while (i < ind - 1) {
             temp = temp.next;
             i++;
         }
-        newNode.next = temp.next; // Link newNode to next node
-        temp.next = newNode; // Link previous node to newNode
+        newNode.next = temp.next;
+        temp.next = newNode;
     }
 
-    // Remove the first node
+    // Remove first element
     public int removeFirst() {
         if (size == 0) {
             System.out.println("LL is Empty");
             return Integer.MIN_VALUE;
         } else if (size == 1) {
             int val = head.data;
-            head = tail = null; // Clear the list
+            head = tail = null;
             size = 0;
             return val;
         }
-        int val = head.data; // Store data of the head
-        head = head.next; // Move head to the next node
+        int val = head.data;
+        head = head.next;
         size--;
         return val;
     }
 
-    // Remove the last node
+    // Remove last element
     public int removeLast() {
         if (size == 0) {
             System.out.println("LL is Empty");
             return Integer.MIN_VALUE;
         } else if (size == 1) {
             int val = head.data;
-            head = tail = null; // Clear the list
+            head = tail = null;
             size = 0;
             return val;
         }
         Node prev = head;
-        for (int i = 0; i < size - 2; i++) { // Traverse to the second last node
+        for (int i = 0; i < size - 2; i++) {
             prev = prev.next;
         }
-        int val = prev.next.data; // Store tail's data
-        prev.next = null; // Remove the last node
-        tail = prev; // Update tail
+        int val = prev.next.data;
+        prev.next = null;
+        tail = prev;
         size--;
         return val;
     }
 
-    // Search for an element iteratively
-    public int itrSearch(int key) {
-        Node temp = head;
-        int i = 0;
-        while (temp != null) {
-            if (temp.data == key) {
-                return i; // Return index if key is found
-            }
-            temp = temp.next;
-            i++;
-        }
-        return -1; // Key not found
-    }
-
-    // Reverse the LinkedList
-    public void reverse() {
-        Node prev = null;
-        Node curr = tail = head; // Start with head
-        Node next;
-        while (curr != null) {
-            next = curr.next; // Save the next node
-            curr.next = prev; // Reverse the link
-            prev = curr; // Move prev forward
-            curr = next; // Move curr forward
-        }
-        head = prev; // Update head
-    }
-
-    // Delete the nth node from the end
+    // remove the nth node
     public void deleteNthfromEnd(int n) {
         int sz = 0;
         Node temp = head;
@@ -162,6 +131,34 @@ public class LinkedList {
         }
         prev.next = prev.next.next; // Skip the nth node
     }
+
+    // Search
+    public int itrSearch(int key) {
+        Node temp = head;
+        int i = 0;
+        while (temp != null) {
+            if (temp.data == key) {
+                return i;
+            }
+            temp = temp.next;
+            i++;
+        }
+        return -1;
+    }
+
+    // Reverse the LinkedList
+    public void reverse() {
+        Node prev = null;
+        Node curr = head;
+        while (curr != null) {
+            Node next = curr.next; // Save the next node
+            curr.next = prev; // Reverse the link
+            prev = curr; // Move prev forward
+            curr = next; // Move curr forward
+        }
+        head = prev; // Update head
+    }
+
 
     // Find the middle node using the slow-fast pointer approach
     public Node findMid(Node Head) {
@@ -223,7 +220,6 @@ public class LinkedList {
         head = new Node(1);
         head.next = new Node(2);
         head.next.next = new Node(3);
-        // Uncomment below line to create a cycle
         // head.next.next.next = head;
         // 1->2->3->1
         System.out.println(isCycle());

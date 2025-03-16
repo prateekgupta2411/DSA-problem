@@ -66,7 +66,7 @@ public class LinkedListCycle {
         head.next.next = new Node(3);
         head.next.next.next = temp;  //  1->2->3->2
 
-        System.out.println(isCycle()); // This will print true if the cycle exists, otherwise false
+        System.out.println(isCycle());
         removeCycle();
         System.out.println(isCycle());
     }

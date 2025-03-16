@@ -1,4 +1,4 @@
-package Day_basic;
+package Day_basic_Math;
 
 import java.util.ArrayList;
 import java.util.List;

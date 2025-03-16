@@ -1,4 +1,4 @@
-package Day_basic;
+package Day_basic_Math;
 
 public class Armstrong_Number {
     public static void main(String[] args) {

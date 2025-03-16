@@ -1,4 +1,4 @@
-package Day_basic;
+package Day_basic_Math;
 
 public class PrimeNumber {
     // Way 1
